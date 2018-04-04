@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+	
+	<record id="kite_purchase_form_view" model="ir.ui.view">
+			<field name="name">kite Purchase</field>
+			<field name="model">kite.purchase</field>
+			<field name="arch" type="xml">
+				<form string="kite purchase" version="7.0">	
+					<header>
+					<button name="confirm" string="Confirm" type="object" states="draft" class="oe_highlight" confirm="Are you sure to proceed ?"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,confirmed" statusbar_colors='{"draft":"blue","confirmed":"red"}' readonly="1"/>
+
+					</header>
+					<group>			
+						<group>	
+							<field name="name"/>		
+							<field name="dept_name"/>
+							<field name="state"/>	
+							<field name="supplier" />
+							
+						</group>	
+							   
+						<group>
+							
+							<field name="creation_date"/>
+							<field name="dept_code"/>
+							<field name="active"/>
+							
+						</group>
+					</group>
+					
+ 	
+					<field name = "line_id"/>
+					<group class="oe_subtotal_footer oe_right">
+						<label for="amount_total"/>
+					<field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" />
+				</group>
+				</form>
+			</field> 
+		</record>
+		
+		<record id="kite_purchase_tree_view" model="ir.ui.view">
+			<field name="name">Kite Purchase Tree</field>
+			<field name="model">kite.purchase</field>
+			<field name="arch" type="xml">
+				<tree toolbar="True" string="Purchase">
+					<field name="dept_code"/>
+					<field name="supplier" />
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+		
+		 <record id="kite_purchase_action_form" model="ir.actions.act_window">
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">kite.purchase</field>
+			<field name="view_type">form</field>
+			<field name="view_id" ref="kite_purchase_tree_view"/>
+		</record>
+
+	
+	<menuitem id="kite_purchase_menu" action="kite_purchase_action_form" name="Purchase Order" parent="kite_department.kite_purchase_menu" sequence="3"/>
+		
+	<record id="kite_purchase_line_tree" model="ir.ui.view">
+		<field name="name">kite.purchase.line.tree</field>
+		<field name="model">kite.purchase.line</field>
+		<field name="arch" type="xml">
+			<tree string="Purchase planning Line" editable="bottom"> 
+					   
+					   <field name="product_name"/>
+					   <field name="product_code" />
+					   <field name="unit_price"  />
+					   <field name="required_qty" />
+					   <field name="pro_type" />
+						
+
+						
+			</tree>		
+		</field>
+	</record>
+	
+		
+</data>
+	</openerp>

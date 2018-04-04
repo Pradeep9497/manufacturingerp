@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+	
+	<record id="kite_department_form_view" model="ir.ui.view">
+			<field name="name">Kite Department</field>
+			<field name="model">kite.department</field>
+			<field name="arch" type="xml">
+				<form string="purchase" version="7.0">	
+					<header>
+					<button name="approve" string="Approve" states="draft" type="object" class="oe_highlight" approve="Are you sure to proceed ?"/>
+					</header>
+					<group>			
+						<group>	
+							<field name="name" />	
+							<field name="dept_name" on_change="onchange_product(dept_name,dept_code)" />
+							<field name="creation_date"/>
+							<field name="state"/>	
+						</group>	
+							   
+						<group>
+							<field name="ind_date" />
+							<field name="dept_code" />	
+							<field name="active"/>
+						</group>
+					</group>
+					<field name = "line_id"/>
+					
+				</form>
+			</field> 
+		</record>
+		
+		<record id="kite_department_tree_view" model="ir.ui.view">
+			<field name="name">Kite Department Tree</field>
+			<field name="model">kite.department</field>
+			<field name="arch" type="xml">
+				<tree toolbar="True" string="Purchase">
+					<field name="dept_name"/>
+					<field name="dept_code"/>
+					<field name="creation_date"/>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+		
+		 <record id="kite_department_action_form" model="ir.actions.act_window">
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">kite.department</field>
+			<field name="view_type">form</field>
+			<field name="view_id" ref="kite_department_tree_view"/>
+		</record>
+
+	
+	
+	
+		<menuitem id="kite_purchase" name="KG Purchase" sequence="3"/>
+		<menuitem id="kite_purchase_menu" name="Purchase Menu" parent="kite_purchase" sequence="1"/>
+		<menuitem id="kite_purchase_menu_action_menu" action="kite_department_action_form"  name="Department Indent" parent="kite_purchase_menu" sequence="1"/>
+		
+		
+       <record id="kite_department_line_tree" model="ir.ui.view">
+		<field name="name">Kite Department Line Tree</field>
+		<field name="model">kite.department.line</field>
+		<field name="arch" type="xml">
+			<tree string="Department planning Line" editable="bottom"> 
+					   
+					   <field name="product_name"  on_change="onchange_product(product_name,unit_price,product_code)" attrs = "{'readonly':[('pro_type','=','fromcp')]}"/>
+					   <field name="product_code" attrs = "{'readonly':[('pro_type','=','fromcp')]}"/>
+					   <field name="unit_price" />
+					   <field name="required_qty"/>
+					   <field name="pro_type" attrs = "{'readonly':[('pro_type','=','fromcp')]}"/>
+
+
+						
+			</tree>		
+		</field>
+	</record>
+	
+
+		
+		
+</data>
+	</openerp>

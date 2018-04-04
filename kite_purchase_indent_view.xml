@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+	
+	<record id="kite_purchase_indent_form_view" model="ir.ui.view">
+			<field name="name">Kite Purchase Indent</field>
+			<field name="model">kite.purchase.indent</field>
+			<field name="arch" type="xml">
+				<form string="purchase" version="7.0">	
+					<header>
+					<button name="approve" string="Approve" states="draft" type="object" class="oe_highlight"/>
+					</header>
+					<group>			
+						<group>	
+							<field name="name" />	
+							<field name="state"/>	
+							<field name="dept_name" />
+							<field name="ind_no" />		
+						</group>	
+							   
+						<group>
+							<field name="creation_date"/>
+							<field name="active"/>
+							<field name="dept_code"/>
+							<field name="ind_date" />				
+						</group>
+					</group>
+					<field name = "line_id"/>
+					
+				</form>
+			</field> 
+		</record>
+		
+		<record id="kite_purchase_indent_tree_view" model="ir.ui.view">
+			<field name="name">kite.purchase.indent.tree</field>
+			<field name="model">kite.purchase.indent</field>
+			<field name="arch" type="xml">
+				<tree toolbar="True" string="Purchase">
+					<field name="name"/>
+					<field name="dept_name" />
+					<field name="ind_no" />	
+					<field name="creation_date"/>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+		
+		 <record id="kite_purchase_indent_action_form" model="ir.actions.act_window">
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">kite.purchase.indent</field>
+			<field name="view_type">form</field>
+			<field name="view_id" ref="kite_purchase_indent_tree_view"/>
+		</record>
+
+	
+	
+	<menuitem id="kite_purchase_menu" action="kite_purchase_indent_action_form" name="Purchase Indent" parent="kite_department.kite_purchase_menu" sequence="2"/>
+		
+		
+       <record id="kite_purchase_indent_line_tree" model="ir.ui.view">
+		<field name="name">kite.purchase.indent.line.tree</field>
+		<field name="model">kite.purchase.indent.line</field>
+		<field name="arch" type="xml">
+			<tree string="Purchase Indent planning Line" editable="bottom"> 
+					   <field name="product_name"  attrs = "{'readonly':[('pro_type','=','fromcp')]}"/>
+					   <field name="product_code" attrs = "{'readonly':[('pro_type','=','fromcp')]}"/>
+					   <field name="unit_price" />
+					   <field name="required_qty"/>
+					   <field name="pro_type" attrs = "{'readonly':[('pro_type','=','fromcp')]}"/>
+
+
+						
+			</tree>		
+		</field>
+	</record>
+	
+
+		
+		
+</data>
+	</openerp>

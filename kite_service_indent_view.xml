@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+	
+	<record id="kite_service_indent_form_view" model="ir.ui.view">
+			<field name="name">Kite service indent</field>
+			<field name="model">kite.service.indent</field>
+			<field name="arch" type="xml">
+				<form string="purchase" version="7.0">	
+					<header>
+					<button name="confirm" string="Confirm" states="draft" type="object" class="oe_highlight"/>
+					</header>
+					<group>			
+						<group>	
+							<field name="name" />	
+							<field name="dept_name" on_change="onchange_product(dept_name,dept_code)" />
+							<field name="creation_date"/>
+							<field name="state"/>	
+						</group>	
+							   
+						<group>
+							<field name="ind_date" />
+							<field name="dept_code" />	
+							<field name="active"/>
+						</group>
+					</group>
+					<field name = "line_id"/>
+					
+				</form>
+			</field> 
+		</record>
+		
+		<record id="kite_service_indent_tree_view" model="ir.ui.view">
+			<field name="name">Kite service indent Tree</field>
+			<field name="model">kite.service.indent</field>
+			<field name="arch" type="xml">
+				<tree toolbar="True" string="Purchase">
+					<field name="dept_name"/>
+					<field name="dept_code"/>
+					<field name="creation_date"/>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+		
+		 <record id="kite_service_indent_action_form" model="ir.actions.act_window">
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">kite.service.indent</field>
+			<field name="view_type">form</field>
+			<field name="view_id" ref="kite_service_indent_tree_view"/>
+		</record>
+
+	
+	
+	
+		<menuitem id="kite_service_indent" name="Service Module" sequence="3"/>
+		<menuitem id="kite_service_indent_menu" name="Service Menu" parent="kite_service_indent" sequence="1"/>
+		<menuitem id="kite_service_indent_menu_action_menu" action="kite_service_indent_action_form"  name="Service Indent" parent="kite_service_indent_menu" sequence="1"/>
+		
+		
+       <record id="kite_service_indent_line_tree" model="ir.ui.view">
+		<field name="name">Kite service indent Line Tree</field>
+		<field name="model">kite.service.indent.line</field>
+		<field name="arch" type="xml">
+			<tree string="Department planning Line" editable="bottom"> 
+					   
+					   <field name="product_name"  on_change="onchange_product(product_name,unit_price,product_code)" attrs = "{'readonly':[('pro_type','=','fromcp')]}"/>
+					   <field name="product_code" attrs = "{'readonly':[('pro_type','=','fromcp')]}"/>
+					   <field name="unit_price" />
+					   <field name="pro_type" attrs = "{'readonly':[('pro_type','=','fromcp')]}"/>
+
+
+						
+			</tree>		
+		</field>
+	</record>
+	
+
+		
+		
+</data>
+	</openerp>
